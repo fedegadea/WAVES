@@ -5,71 +5,96 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CardCopy – Pedidos de Impresión</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
 
   <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
-      <img src="public/images/logo-cardcopy.png" alt="CardCopy Logo" class="logo" onerror="this.style.display='none'; document.querySelector('.logo-text').style.display='block'" />
+      <img src="public/images/logo-cardcopy.png" alt="CardCopy" class="logo"
+           onerror="this.style.display='none'; document.querySelector('.logo-text').style.display='flex'" />
       <span class="logo-text" style="display:none;">CardCopy</span>
-      <div class="header-info">
-        <p>📍 Soluciones Digitales para Estudiantes</p>
-        <p>📦 Envío por mensajería · Pago al repartidor</p>
-      </div>
+      <div class="header-badge">Soluciones Digitales</div>
     </div>
   </header>
 
   <!-- HERO -->
   <section class="hero">
-    <h1>Pedí tus impresiones sin salir de casa</h1>
-    <p>Completá el formulario, subí tu archivo PDF y lo recibís en la puerta. Simple y rápido.</p>
+    <h1>Pedí tus impresiones<br/><span>sin salir de casa</span></h1>
+    <p>Completá el formulario, pagá por Mercado Pago y recibís todo en la puerta.</p>
+
+    <!-- STEPS -->
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-label">Completá<br/>el pedido</div>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-label">Transferí<br/>por MP</div>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-label">Subí el<br/>comprobante</div>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-label">¡Listo,<br/>enviá!</div>
+      </div>
+    </div>
   </section>
 
-  <!-- FORM SECTION -->
   <main class="container">
     <form
       action="https://formsubmit.co/guilleulrich@gmail.com"
       method="POST"
       enctype="multipart/form-data"
       class="form-card"
+      id="mainForm"
+      novalidate
     >
-      <!-- FormSubmit config -->
       <input type="hidden" name="_subject" value="🖨️ Nuevo pedido CardCopy" />
       <input type="hidden" name="_template" value="table" />
-      <input type="hidden" name="_next" value="https://cardcopy-waves.vercel.app/gracias.html" />
+      <input type="hidden" name="_next" value="https://waves-lr7zccor2-fedes-projects-91be2341.vercel.app/gracias.html" />
       <input type="hidden" name="_captcha" value="false" />
-      <!-- Honeypot anti-spam -->
       <input type="text" name="_honey" style="display:none" />
 
-      <!-- DATOS PERSONALES -->
+      <!-- PASO 1: DATOS -->
       <fieldset class="section">
-        <legend class="section-title">👤 Tus datos</legend>
+        <legend class="section-title">
+          <span class="section-num">1</span>
+          Tus datos de contacto
+        </legend>
         <div class="form-grid">
           <div class="field">
-            <label for="nombre">Nombre completo *</label>
+            <label for="nombre">Nombre completo <span class="req">*</span></label>
             <input type="text" id="nombre" name="Nombre" required placeholder="Juan Pérez" />
           </div>
           <div class="field">
-            <label for="telefono">Teléfono / WhatsApp *</label>
+            <label for="telefono">WhatsApp <span class="req">*</span></label>
             <input type="tel" id="telefono" name="Teléfono" required placeholder="11 1234-5678" />
           </div>
           <div class="field">
-            <label for="email">Email *</label>
+            <label for="email">Email <span class="req">*</span></label>
             <input type="email" id="email" name="Email" required placeholder="juan@mail.com" />
           </div>
           <div class="field">
             <label for="direccion">Dirección de entrega</label>
-            <input type="text" id="direccion" name="Dirección de entrega" placeholder="Calle 123, Ciudad (si es envío)" />
+            <input type="text" id="direccion" name="Dirección" placeholder="Calle 123, Ciudad" />
           </div>
         </div>
       </fieldset>
 
-      <!-- TIPO DE COPIA -->
+      <!-- PASO 2: TIPO DE COPIA -->
       <fieldset class="section">
-        <legend class="section-title">🖨️ Tipo de copia</legend>
+        <legend class="section-title">
+          <span class="section-num">2</span>
+          Tipo de impresión
+        </legend>
         <div class="option-grid">
           <label class="option-card">
             <input type="radio" name="Tipo de copia" value="Blanco y negro" required />
@@ -80,7 +105,7 @@
             </div>
           </label>
           <label class="option-card">
-            <input type="radio" name="Tipo de copia" value="Color láser (alta definición)" />
+            <input type="radio" name="Tipo de copia" value="Color Láser (alta definición)" />
             <div class="option-body">
               <span class="option-icon">🎨</span>
               <span class="option-label">Color Láser</span>
@@ -98,16 +123,19 @@
         </div>
       </fieldset>
 
-      <!-- CANTIDAD Y PAPEL -->
+      <!-- PASO 3: CANTIDAD Y PAPEL -->
       <fieldset class="section">
-        <legend class="section-title">📄 Cantidad y papel</legend>
+        <legend class="section-title">
+          <span class="section-num">3</span>
+          Cantidad y papel
+        </legend>
         <div class="form-grid">
           <div class="field">
-            <label for="cantidad">Cantidad de copias *</label>
-            <input type="number" id="cantidad" name="Cantidad de copias" min="1" required placeholder="Ej: 10" />
+            <label for="cantidad">Cantidad de copias <span class="req">*</span></label>
+            <input type="number" id="cantidad" name="Cantidad" min="1" required placeholder="Ej: 10" />
           </div>
           <div class="field">
-            <label>Tamaño de hoja *</label>
+            <label>Tamaño <span class="req">*</span></label>
             <div class="radio-row">
               <label class="radio-pill">
                 <input type="radio" name="Tamaño" value="A4" required />
@@ -120,14 +148,14 @@
             </div>
           </div>
           <div class="field">
-            <label>Tipo de papel *</label>
+            <label>Tipo de papel <span class="req">*</span></label>
             <div class="radio-row">
               <label class="radio-pill">
-                <input type="radio" name="Tipo de papel" value="Papel común 75g" required />
+                <input type="radio" name="Papel" value="Común 75g" required />
                 <span>Común 75g</span>
               </label>
               <label class="radio-pill">
-                <input type="radio" name="Tipo de papel" value="Papel ilustración 120g brillante" />
+                <input type="radio" name="Papel" value="Ilustración 120g brillante" />
                 <span>Ilustración 120g brillante</span>
               </label>
             </div>
@@ -135,9 +163,12 @@
         </div>
       </fieldset>
 
-      <!-- TERMINACIÓN -->
+      <!-- PASO 4: TERMINACIÓN -->
       <fieldset class="section">
-        <legend class="section-title">📎 Terminación</legend>
+        <legend class="section-title">
+          <span class="section-num">4</span>
+          Terminación
+        </legend>
         <div class="option-grid three-col">
           <label class="option-card">
             <input type="radio" name="Terminación" value="Encuadernado" required />
@@ -163,64 +194,134 @@
         </div>
       </fieldset>
 
-      <!-- PAGO Y ENTREGA -->
+      <!-- PASO 5: ENTREGA -->
       <fieldset class="section">
-        <legend class="section-title">💳 Pago y entrega</legend>
+        <legend class="section-title">
+          <span class="section-num">5</span>
+          Forma de entrega
+        </legend>
         <div class="option-grid three-col">
           <label class="option-card">
-            <input type="radio" name="Forma de entrega y pago" value="Mercado Pago – Retiro en local" required />
+            <input type="radio" name="Entrega" value="Retiro en local" required />
             <div class="option-body">
               <span class="option-icon">🏪</span>
               <span class="option-label">Retiro en local</span>
-              <span class="option-desc">Mercado Pago</span>
             </div>
           </label>
           <label class="option-card">
-            <input type="radio" name="Forma de entrega y pago" value="Mercado Pago – Envío por mensajería" />
+            <input type="radio" name="Entrega" value="Envío por mensajería" />
             <div class="option-body">
               <span class="option-icon">🛵</span>
-              <span class="option-label">Envío – Mercado Pago</span>
-              <span class="option-desc">Pago online previo</span>
-            </div>
-          </label>
-          <label class="option-card">
-            <input type="radio" name="Forma de entrega y pago" value="Efectivo al repartidor – Envío por mensajería" />
-            <div class="option-body">
-              <span class="option-icon">💵</span>
-              <span class="option-label">Envío – Efectivo</span>
-              <span class="option-desc">Pago al repartidor</span>
+              <span class="option-label">Envío a domicilio</span>
             </div>
           </label>
         </div>
       </fieldset>
 
-      <!-- ARCHIVO PDF -->
+      <!-- PASO 6: ARCHIVO PDF -->
       <fieldset class="section">
-        <legend class="section-title">📁 Tu archivo</legend>
-        <div class="upload-area" id="uploadArea">
-          <input type="file" id="archivo" name="Archivo PDF" accept=".pdf" required class="file-input" />
-          <label for="archivo" class="upload-label">
+        <legend class="section-title">
+          <span class="section-num">6</span>
+          Tu archivo a imprimir
+        </legend>
+        <div class="upload-area" id="pdfArea">
+          <input type="file" id="archivoPDF" name="Archivo PDF" accept=".pdf" required class="file-input" />
+          <label for="archivoPDF" class="upload-label">
             <span class="upload-icon">📄</span>
-            <span class="upload-text">Arrastrá tu PDF aquí o <u>hacé clic para seleccionarlo</u></span>
-            <span class="file-name" id="fileName">Ningún archivo seleccionado</span>
+            <span class="upload-text">Arrastrá tu PDF o <u>hacé clic para seleccionarlo</u></span>
+            <span class="file-name" id="pdfName">Ningún archivo seleccionado</span>
           </label>
         </div>
         <p class="field-hint">Solo archivos PDF · Máximo 10MB</p>
       </fieldset>
 
+      <!-- PASO 7: PAGO -->
+      <div class="payment-block">
+        <div class="payment-header">
+          <span class="payment-icon">💳</span>
+          <div>
+            <h3>Transferí el pago por Mercado Pago</h3>
+            <p>El pedido se procesa <strong>solo después de confirmar el pago</strong></p>
+          </div>
+        </div>
+        <div class="alias-box">
+          <span class="alias-label">Alias MP</span>
+          <span class="alias-value" id="aliasValue">CARDCOPY.MP</span>
+          <button type="button" class="copy-btn" onclick="copyAlias()">Copiar</button>
+        </div>
+        <div class="payment-steps">
+          <div class="pay-step">
+            <span class="pay-num">1</span>
+            <span>Abrí Mercado Pago y transferí al alias de arriba</span>
+          </div>
+          <div class="pay-step">
+            <span class="pay-num">2</span>
+            <span>Tomá una captura de pantalla del comprobante</span>
+          </div>
+          <div class="pay-step">
+            <span class="pay-num">3</span>
+            <span>Subí la captura en el campo de abajo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASO 8: COMPROBANTE -->
+      <fieldset class="section comprobante-section" id="comprobanteSection">
+        <legend class="section-title comprobante-title">
+          <span class="section-num orange">8</span>
+          Comprobante de pago
+          <span class="required-badge">Obligatorio para enviar</span>
+        </legend>
+
+        <div class="upload-area comprobante-upload" id="comprobanteArea">
+          <input type="file" id="comprobante" name="Comprobante de pago" accept="image/*,.pdf" class="file-input" />
+          <label for="comprobante" class="upload-label">
+            <span class="upload-icon">🧾</span>
+            <span class="upload-text">Subí la captura del comprobante de transferencia</span>
+            <span class="upload-subtext">JPG, PNG o PDF · Máximo 5MB</span>
+            <span class="file-name" id="comprobanteName">Ningún comprobante adjunto</span>
+          </label>
+        </div>
+
+        <!-- ADVERTENCIA -->
+        <div class="warning-box" id="warningBox">
+          <span class="warning-icon">⚠️</span>
+          <div>
+            <strong>Sin comprobante no podés enviar el pedido</strong>
+            <p>El local necesita verificar el pago antes de procesar tu impresión.</p>
+          </div>
+        </div>
+
+        <!-- CONFIRMACIÓN -->
+        <div class="ok-box" id="okBox" style="display:none;">
+          <span>✅</span>
+          <div>
+            <strong>Comprobante adjunto correctamente</strong>
+            <p>Ya podés enviar tu pedido.</p>
+          </div>
+        </div>
+      </fieldset>
+
       <!-- OBSERVACIONES -->
       <fieldset class="section">
-        <legend class="section-title">💬 Observaciones</legend>
+        <legend class="section-title">
+          <span class="section-num">9</span>
+          Observaciones
+        </legend>
         <div class="field">
           <label for="obs">¿Algo más que debamos saber?</label>
-          <textarea id="obs" name="Observaciones" rows="3" placeholder="Ej: imprimir de la página 5 a la 20, doble faz, etc."></textarea>
+          <textarea id="obs" name="Observaciones" rows="3"
+            placeholder="Ej: imprimir del PDF de la página 5 a la 20, doble faz, etc."></textarea>
         </div>
       </fieldset>
 
       <!-- SUBMIT -->
       <div class="submit-area">
-        <p class="submit-note">Al enviar el formulario te contactaremos para confirmar el pedido y coordinar el pago.</p>
-        <button type="submit" class="btn-submit">
+        <div class="submit-blocker" id="submitBlocker">
+          <span>🔒</span>
+          <p>Adjuntá el comprobante de pago para habilitar el envío</p>
+        </div>
+        <button type="submit" class="btn-submit" id="submitBtn" disabled>
           Enviar pedido ✉️
         </button>
       </div>
@@ -228,29 +329,60 @@
     </form>
   </main>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <p>© 2025 <strong>CardCopy – Soluciones Digitales</strong> · Todos los derechos reservados</p>
   </footer>
 
   <script>
-    // Mostrar nombre del archivo seleccionado
-    document.getElementById('archivo').addEventListener('change', function () {
+    // PDF upload
+    document.getElementById('archivoPDF').addEventListener('change', function () {
       const name = this.files[0] ? this.files[0].name : 'Ningún archivo seleccionado';
-      document.getElementById('fileName').textContent = name;
-      if (this.files[0]) {
-        document.getElementById('uploadArea').classList.add('has-file');
+      document.getElementById('pdfName').textContent = name;
+      document.getElementById('pdfArea').classList.toggle('has-file', !!this.files[0]);
+    });
+
+    // Comprobante upload - desbloquea el botón
+    document.getElementById('comprobante').addEventListener('change', function () {
+      const hasFile = !!this.files[0];
+      const name = hasFile ? this.files[0].name : 'Ningún comprobante adjunto';
+
+      document.getElementById('comprobanteName').textContent = name;
+      document.getElementById('comprobanteArea').classList.toggle('has-file', hasFile);
+
+      document.getElementById('warningBox').style.display = hasFile ? 'none' : 'flex';
+      document.getElementById('okBox').style.display = hasFile ? 'flex' : 'none';
+      document.getElementById('submitBlocker').style.display = hasFile ? 'none' : 'flex';
+      document.getElementById('submitBtn').disabled = !hasFile;
+
+      if (hasFile) {
+        document.getElementById('submitBtn').classList.add('enabled');
+        document.getElementById('comprobanteSection').classList.add('done');
+      } else {
+        document.getElementById('submitBtn').classList.remove('enabled');
+        document.getElementById('comprobanteSection').classList.remove('done');
       }
     });
 
-    // Highlight option cards on selection
+    // Option cards highlight
     document.querySelectorAll('.option-card input[type="radio"]').forEach(input => {
       input.addEventListener('change', function () {
-        const group = document.querySelectorAll(`input[name="${this.name}"]`);
-        group.forEach(r => r.closest('.option-card').classList.remove('selected'));
+        document.querySelectorAll(`input[name="${this.name}"]`).forEach(r => {
+          r.closest('.option-card').classList.remove('selected');
+        });
         this.closest('.option-card').classList.add('selected');
       });
     });
+
+    // Copiar alias
+    function copyAlias() {
+      const alias = document.getElementById('aliasValue').textContent;
+      navigator.clipboard.writeText(alias).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = '¡Copiado!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 2000);
+      });
+    }
   </script>
 </body>
 </html>
