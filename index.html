@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CardCopy – Pedidos de Impresión</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <img src="public/images/logo-cardcopy.png" alt="CardCopy Logo" class="logo" onerror="this.style.display='none'; document.querySelector('.logo-text').style.display='block'" />
+      <span class="logo-text" style="display:none;">CardCopy</span>
+      <div class="header-info">
+        <p>📍 Soluciones Digitales para Estudiantes</p>
+        <p>📦 Envío por mensajería · Pago al repartidor</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Pedí tus impresiones sin salir de casa</h1>
+    <p>Completá el formulario, subí tu archivo PDF y lo recibís en la puerta. Simple y rápido.</p>
+  </section>
+
+  <!-- FORM SECTION -->
+  <main class="container">
+    <form
+      action="https://formsubmit.co/guilleulrich@gmail.com"
+      method="POST"
+      enctype="multipart/form-data"
+      class="form-card"
+    >
+      <!-- FormSubmit config -->
+      <input type="hidden" name="_subject" value="🖨️ Nuevo pedido CardCopy" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_next" value="https://cardcopy-waves.vercel.app/gracias.html" />
+      <input type="hidden" name="_captcha" value="false" />
+      <!-- Honeypot anti-spam -->
+      <input type="text" name="_honey" style="display:none" />
+
+      <!-- DATOS PERSONALES -->
+      <fieldset class="section">
+        <legend class="section-title">👤 Tus datos</legend>
+        <div class="form-grid">
+          <div class="field">
+            <label for="nombre">Nombre completo *</label>
+            <input type="text" id="nombre" name="Nombre" required placeholder="Juan Pérez" />
+          </div>
+          <div class="field">
+            <label for="telefono">Teléfono / WhatsApp *</label>
+            <input type="tel" id="telefono" name="Teléfono" required placeholder="11 1234-5678" />
+          </div>
+          <div class="field">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="Email" required placeholder="juan@mail.com" />
+          </div>
+          <div class="field">
+            <label for="direccion">Dirección de entrega</label>
+            <input type="text" id="direccion" name="Dirección de entrega" placeholder="Calle 123, Ciudad (si es envío)" />
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- TIPO DE COPIA -->
+      <fieldset class="section">
+        <legend class="section-title">🖨️ Tipo de copia</legend>
+        <div class="option-grid">
+          <label class="option-card">
+            <input type="radio" name="Tipo de copia" value="Blanco y negro" required />
+            <div class="option-body">
+              <span class="option-icon">⬛</span>
+              <span class="option-label">Blanco y negro</span>
+              <span class="option-desc">Impresión estándar</span>
+            </div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="Tipo de copia" value="Color láser (alta definición)" />
+            <div class="option-body">
+              <span class="option-icon">🎨</span>
+              <span class="option-label">Color Láser</span>
+              <span class="option-desc">Excelente definición</span>
+            </div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="Tipo de copia" value="Color Inkjet (calidad estándar)" />
+            <div class="option-body">
+              <span class="option-icon">🖌️</span>
+              <span class="option-label">Color Inkjet</span>
+              <span class="option-desc">Calidad estándar</span>
+            </div>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- CANTIDAD Y PAPEL -->
+      <fieldset class="section">
+        <legend class="section-title">📄 Cantidad y papel</legend>
+        <div class="form-grid">
+          <div class="field">
+            <label for="cantidad">Cantidad de copias *</label>
+            <input type="number" id="cantidad" name="Cantidad de copias" min="1" required placeholder="Ej: 10" />
+          </div>
+          <div class="field">
+            <label>Tamaño de hoja *</label>
+            <div class="radio-row">
+              <label class="radio-pill">
+                <input type="radio" name="Tamaño" value="A4" required />
+                <span>A4</span>
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="Tamaño" value="Oficio" />
+                <span>Oficio</span>
+              </label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Tipo de papel *</label>
+            <div class="radio-row">
+              <label class="radio-pill">
+                <input type="radio" name="Tipo de papel" value="Papel común 75g" required />
+                <span>Común 75g</span>
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="Tipo de papel" value="Papel ilustración 120g brillante" />
+                <span>Ilustración 120g brillante</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- TERMINACIÓN -->
+      <fieldset class="section">
+        <legend class="section-title">📎 Terminación</legend>
+        <div class="option-grid three-col">
+          <label class="option-card">
+            <input type="radio" name="Terminación" value="Encuadernado" required />
+            <div class="option-body">
+              <span class="option-icon">📚</span>
+              <span class="option-label">Encuadernado</span>
+            </div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="Terminación" value="Abrochado" />
+            <div class="option-body">
+              <span class="option-icon">📌</span>
+              <span class="option-label">Abrochado</span>
+            </div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="Terminación" value="Suelto" />
+            <div class="option-body">
+              <span class="option-icon">📋</span>
+              <span class="option-label">Suelto</span>
+            </div>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- PAGO Y ENTREGA -->
+      <fieldset class="section">
+        <legend class="section-title">💳 Pago y entrega</legend>
+        <div class="option-grid three-col">
+          <label class="option-card">
+            <input type="radio" name="Forma de entrega y pago" value="Mercado Pago – Retiro en local" required />
+            <div class="option-body">
+              <span class="option-icon">🏪</span>
+              <span class="option-label">Retiro en local</span>
+              <span class="option-desc">Mercado Pago</span>
+            </div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="Forma de entrega y pago" value="Mercado Pago – Envío por mensajería" />
+            <div class="option-body">
+              <span class="option-icon">🛵</span>
+              <span class="option-label">Envío – Mercado Pago</span>
+              <span class="option-desc">Pago online previo</span>
+            </div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="Forma de entrega y pago" value="Efectivo al repartidor – Envío por mensajería" />
+            <div class="option-body">
+              <span class="option-icon">💵</span>
+              <span class="option-label">Envío – Efectivo</span>
+              <span class="option-desc">Pago al repartidor</span>
+            </div>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- ARCHIVO PDF -->
+      <fieldset class="section">
+        <legend class="section-title">📁 Tu archivo</legend>
+        <div class="upload-area" id="uploadArea">
+          <input type="file" id="archivo" name="Archivo PDF" accept=".pdf" required class="file-input" />
+          <label for="archivo" class="upload-label">
+            <span class="upload-icon">📄</span>
+            <span class="upload-text">Arrastrá tu PDF aquí o <u>hacé clic para seleccionarlo</u></span>
+            <span class="file-name" id="fileName">Ningún archivo seleccionado</span>
+          </label>
+        </div>
+        <p class="field-hint">Solo archivos PDF · Máximo 10MB</p>
+      </fieldset>
+
+      <!-- OBSERVACIONES -->
+      <fieldset class="section">
+        <legend class="section-title">💬 Observaciones</legend>
+        <div class="field">
+          <label for="obs">¿Algo más que debamos saber?</label>
+          <textarea id="obs" name="Observaciones" rows="3" placeholder="Ej: imprimir de la página 5 a la 20, doble faz, etc."></textarea>
+        </div>
+      </fieldset>
+
+      <!-- SUBMIT -->
+      <div class="submit-area">
+        <p class="submit-note">Al enviar el formulario te contactaremos para confirmar el pedido y coordinar el pago.</p>
+        <button type="submit" class="btn-submit">
+          Enviar pedido ✉️
+        </button>
+      </div>
+
+    </form>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2025 <strong>CardCopy – Soluciones Digitales</strong> · Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+    // Mostrar nombre del archivo seleccionado
+    document.getElementById('archivo').addEventListener('change', function () {
+      const name = this.files[0] ? this.files[0].name : 'Ningún archivo seleccionado';
+      document.getElementById('fileName').textContent = name;
+      if (this.files[0]) {
+        document.getElementById('uploadArea').classList.add('has-file');
+      }
+    });
+
+    // Highlight option cards on selection
+    document.querySelectorAll('.option-card input[type="radio"]').forEach(input => {
+      input.addEventListener('change', function () {
+        const group = document.querySelectorAll(`input[name="${this.name}"]`);
+        group.forEach(r => r.closest('.option-card').classList.remove('selected'));
+        this.closest('.option-card').classList.add('selected');
+      });
+    });
+  </script>
+</body>
+</html>

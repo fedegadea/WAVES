@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¡Pedido recibido! – CardCopy</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    .thanks-card {
+      max-width: 520px;
+      margin: 60px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(13,71,161,0.1);
+      padding: 56px 40px;
+      text-align: center;
+    }
+    .thanks-icon { font-size: 4rem; margin-bottom: 20px; }
+    .thanks-card h1 { color: #1565C0; font-size: 1.8rem; margin-bottom: 12px; }
+    .thanks-card p { color: #64748B; line-height: 1.7; margin-bottom: 8px; }
+    .btn-back {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 12px 32px;
+      background: #1565C0;
+      color: #fff;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.2s;
+    }
+    .btn-back:hover { background: #0D47A1; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <img src="public/images/logo-cardcopy.png" alt="CardCopy Logo" class="logo" onerror="this.style.display='none'; document.querySelector('.logo-text').style.display='block'" />
+      <span class="logo-text" style="display:none;">CardCopy</span>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="thanks-card">
+      <div class="thanks-icon">✅</div>
+      <h1>¡Pedido recibido!</h1>
+      <p>Tu solicitud fue enviada correctamente.</p>
+      <p>Nos vamos a comunicar con vos a la brevedad para confirmar el pedido y coordinar el pago.</p>
+      <p><strong>¡Gracias por elegir CardCopy!</strong></p>
+      <a href="/" class="btn-back">Hacer otro pedido</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2025 <strong>CardCopy – Soluciones Digitales</strong></p>
+  </footer>
+</body>
+</html>
