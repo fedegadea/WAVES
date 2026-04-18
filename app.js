@@ -2,45 +2,17 @@ const express = require("express")
 const path = require("path")
 const app = express()
 
-//Pongo publica la carpeta public
-app.use(express.static(path.join(__dirname, "/public")))
+// Servir archivos estáticos desde la raíz del proyecto
+app.use(express.static(__dirname))
 
-
-//Poner en servidor localhost:3000
-app.listen(process.env.PORT || 3000,function(){
-    console.log("Servidor subido a la escaloneta")
+app.get("/gracias", (req, res) => {
+  res.sendFile(path.join(__dirname, "gracias.html"))
 })
 
-//Poner en la web http://localhost:3000/home
-app.get("/home",(req,res)=>{
-    res.sendFile((__dirname + "/views/home.html"))
-
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"))
 })
 
-//Poner en la web http://localhost:3000/login
-app.get("/login",(req,res)=>{
-    res.sendFile((__dirname + "/views/login.html"))
- 
-})
-
-//Poner en la web http://localhost:3000/registrarse
-app.get("/registrarse",(req,res)=>{
-    res.sendFile((__dirname + "/views/registrarse.html"))
- 
-})
-
-//Poner en la web http://localhost:3000/descripcion
-app.get("/descripcion",(req,res)=>{
-    res.sendFile((__dirname + "/views/descripcionproducto.html"))
-
-})
-//Poner en la web http://localhost:3000/cart
-app.get("/cart",(req,res)=>{
-    res.sendFile((__dirname + "/views/carrocompras.html"))
-
-})
-
-//Rutas no asignadas   
-app.get("/",(req,res)=>{//aca va directo al home
-    res.sendFile(__dirname + "/views/home.html")
+app.listen(process.env.PORT || 3000, function () {
+  console.log("CardCopy corriendo en puerto " + (process.env.PORT || 3000))
 })
