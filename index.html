@@ -420,9 +420,15 @@
       const papelLabel   = (dataTipo !== 'bn' && papel) ? ' · ' + papel.value : '';
       const dobleFazNote = dobleFaz ? ` → ${hojasFisicas} hojas físicas c/copia` : '';
 
+      // Descripción clara del cálculo
+      const hojasDesc = dobleFaz
+        ? `${hojas} pág. ÷ 2 (doble faz) = ${hojasFisicas} hojas físicas`
+        : `${hojas} hojas`;
+      const copiasDesc = cantCopias > 1 ? ` × ${cantCopias} copias` : '';
+
       let detalle = `<div class="precio-fila">
-        <span>${hojas} hojas${dobleFazNote} × ${cantCopias} cop. · ${tamañoLabel}${papelLabel}</span>
-        <span>${formatPeso(precioPorHoja)}/hoja → ${formatPeso(subtotalHojas)}</span>
+        <span>${hojasDesc}${copiasDesc} · ${tamañoLabel}${papelLabel}</span>
+        <span>${formatPeso(precioPorHoja)}/copia × ${hojasFisicas * cantCopias} = ${formatPeso(subtotalHojas)}</span>
       </div>`;
 
       if (costoEncuadernado > 0) {
