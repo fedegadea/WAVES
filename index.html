@@ -203,6 +203,20 @@
         </div>
       </fieldset>
 
+      <!-- PRECIO ESTIMADO -->
+      <div class="precio-block" id="precioBlock" style="display:none;">
+        <div class="precio-header">
+          <span>🧮</span>
+          <h3>Total estimado de tu pedido</h3>
+        </div>
+        <div class="precio-detalle" id="precioDetalle"></div>
+        <div class="precio-total">
+          <span>Total a transferir:</span>
+          <strong id="precioTotal">$0</strong>
+        </div>
+        <p class="precio-nota">* Precio estimado. Puede variar si hay ajustes en el pedido.</p>
+      </div>
+
       <!-- PASO 5: ENTREGA -->
       <fieldset class="section">
         <legend class="section-title">
@@ -243,20 +257,6 @@
         </div>
         <p class="field-hint">Solo archivos PDF · Máximo 10MB</p>
       </fieldset>
-
-      <!-- PRECIO ESTIMADO -->
-      <div class="precio-block" id="precioBlock" style="display:none;">
-        <div class="precio-header">
-          <span>🧮</span>
-          <h3>Total estimado de tu pedido</h3>
-        </div>
-        <div class="precio-detalle" id="precioDetalle"></div>
-        <div class="precio-total">
-          <span>Total a transferir:</span>
-          <strong id="precioTotal">$0</strong>
-        </div>
-        <p class="precio-nota">* Precio estimado. Puede variar si hay ajustes en el pedido.</p>
-      </div>
 
       <!-- PASO 7: PAGO -->
       <div class="payment-block">
@@ -371,31 +371,61 @@
       const papel = document.querySelector('input[name="Papel"]:checked');
       const cantidad = parseInt(document.getElementById('cantidad').value) || 0;
       const terminacion = document.querySelector('input[name="Terminación"]:checked');
+      const dobleFaz = document.getElementById('dobleFaz').checked;
 
-      if (!tipo || !tamaño || !papel || !cantidad) {
+      // Mostrar bloque apenas haya algo para calcular
+      if (!tipo || !cantidad) {
         document.getElementById('precioBlock').style.display = 'none';
         return;
       }
 
       const dataTipo = tipo.dataset.tipo;
       let precioCopia = 0;
+      let detalle = '';
+      let sinDatos = false;
 
       if (dataTipo === 'bn') {
-        precioCopia = PRECIOS_COPIA.bn[tamaño.value] || 0;
+        // B&N: solo necesita tamaño
+        if (tamaño) {
+          precioCopia = PRECIOS_COPIA.bn[tamaño.value] || 0;
+        } else {
+          sinDatos = true;
+        }
       } else {
-        precioCopia = (PRECIOS_COPIA.color[tamaño.value] || {})[papel.value] || 0;
+        // Color: necesita tamaño y papel
+        if (tamaño && papel) {
+          precioCopia = (PRECIOS_COPIA.color[tamaño.value] || {})[papel.value] || 0;
+        } else {
+          sinDatos = true;
+        }
       }
 
-      const subtotalCopias = precioCopia * cantidad;
+      if (sinDatos) {
+        document.getElementById('precioDetalle').innerHTML =
+          '<div class="precio-fila"><span>Seleccioná tamaño' + (dataTipo !== 'bn' ? ' y tipo de papel' : '') + ' para ver el precio</span><span>—</span></div>';
+        document.getElementById('precioTotal').textContent = '—';
+        document.getElementById('totalHidden').value = '';
+        document.getElementById('precioBlock').style.display = 'block';
+        return;
+      }
+
+      // Doble faz: divide la cantidad de hojas a la mitad (mismo precio, menos hojas físicas)
+      let cantidadEfectiva = dobleFaz ? Math.ceil(cantidad / 2) : cantidad;
+      const subtotalCopias = precioCopia * cantidadEfectiva;
       const costoEncuadernado = terminacion ? parseInt(terminacion.dataset.encuadernado || 0) : 0;
       const total = subtotalCopias + costoEncuadernado;
 
-      // Detalle
-      let detalle = `
-        <div class="precio-fila"><span>${cantidad} copia${cantidad > 1 ? 's' : ''} ${tipo.value} (${tamaño.value} · ${papel.value})</span><span>${formatPeso(precioCopia)} c/u → ${formatPeso(subtotalCopias)}</span></div>
-      `;
+      const tamañoLabel = tamaño ? tamaño.value : '—';
+      const papelLabel = (dataTipo !== 'bn' && papel) ? ' · ' + papel.value : '';
+      const dobleFazLabel = dobleFaz ? ` (doble faz → ${cantidadEfectiva} hojas)` : '';
+
+      detalle = `<div class="precio-fila">
+        <span>${cantidad} cop. ${tipo.value} · ${tamañoLabel}${papelLabel}${dobleFazLabel}</span>
+        <span>${formatPeso(precioCopia)} c/u → ${formatPeso(subtotalCopias)}</span>
+      </div>`;
+
       if (costoEncuadernado > 0) {
-        detalle += `<div class="precio-fila"><span>${terminacion.value}</span><span>${formatPeso(costoEncuadernado)}</span></div>`;
+        detalle += `<div class="precio-fila"><span>${terminacion.value.split(' (+')[0]}</span><span>+${formatPeso(costoEncuadernado)}</span></div>`;
       }
 
       document.getElementById('precioDetalle').innerHTML = detalle;
@@ -408,6 +438,7 @@
     ['input[name="Tipo de copia"]', 'input[name="Tamaño"]', 'input[name="Papel"]', 'input[name="Terminación"]']
       .forEach(sel => document.querySelectorAll(sel).forEach(el => el.addEventListener('change', calcularTotal)));
     document.getElementById('cantidad').addEventListener('input', calcularTotal);
+    document.getElementById('dobleFaz').addEventListener('change', calcularTotal);
 
     // PDF upload
     document.getElementById('archivoPDF').addEventListener('change', function () {
