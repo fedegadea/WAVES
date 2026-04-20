@@ -143,17 +143,21 @@
             <label>Tipo de papel <span class="req">*</span></label>
             <div class="radio-row">
               <label class="radio-pill">
-                <input type="radio" name="Papel" value="Común 75g" />
+                <input type="radio" name="Papel" value="Común 75g" data-precio-papel="500" />
                 <span>Común 75g</span>
               </label>
               <label class="radio-pill">
-                <input type="radio" name="Papel" value="Ilustración 120g brillante" />
+                <input type="radio" name="Papel" value="Ilustración 120g brillante" data-precio-papel="700" />
                 <span>Ilustración 120g</span>
               </label>
               <label class="radio-pill">
-                <input type="radio" name="Papel" value="Fotográfico" />
+                <input type="radio" name="Papel" value="Fotográfico" data-precio-papel="900" />
                 <span>Fotográfico</span>
               </label>
+            </div>
+            <div class="papel-precio-hint" id="papelPrecioHint" style="display:none;">
+              <span class="papel-precio-label">Precio por copia:</span>
+              <span class="papel-precio-valor" id="papelPrecioValor"></span>
             </div>
           </div>
           <div class="field">
@@ -353,7 +357,24 @@
   </main>
 
   <footer class="footer">
-    <p>© 2025 <strong>CardCopy – Soluciones Digitales</strong> · Todos los derechos reservados</p>
+    <div class="footer-info">
+      <div class="footer-col">
+        <strong>📍 Local</strong>
+        <span>Pasteur 345, 1° Piso</span>
+        <span>Gral. E. Godoy, Río Negro</span>
+        <span>Argentina</span>
+      </div>
+      <div class="footer-col">
+        <strong>📞 Contacto</strong>
+        <span><a href="tel:2984354641">298 435-4641</a></span>
+      </div>
+      <div class="footer-col">
+        <strong>🕐 Atención</strong>
+        <span>Lunes a Viernes: 9 a 18 hs</span>
+        <span>Sábados y feriados: cerrado</span>
+      </div>
+    </div>
+    <p class="footer-copy">© 2025 <strong>CardCopy – Soluciones Digitales</strong> · Todos los derechos reservados</p>
   </footer>
 
   <script>
@@ -451,6 +472,19 @@
       el.addEventListener('change', actualizarCamposPapel));
     ['input[name="Tamaño"]', 'input[name="Papel"]', 'input[name="Terminación"]']
       .forEach(sel => document.querySelectorAll(sel).forEach(el => el.addEventListener('change', calcularTotal)));
+    // Mostrar precio del papel seleccionado
+    document.querySelectorAll('input[name="Papel"]').forEach(el => {
+      el.addEventListener('change', function() {
+        const hint  = document.getElementById('papelPrecioHint');
+        const valor = document.getElementById('papelPrecioValor');
+        const precio = this.dataset.precioPapel;
+        if (precio) {
+          valor.textContent = '$' + parseInt(precio).toLocaleString('es-AR') + ' por copia';
+          hint.style.display = 'flex';
+        }
+      });
+    });
+
     document.getElementById('hojas').addEventListener('input', calcularTotal);
     document.getElementById('cantidad').addEventListener('input', calcularTotal);
     document.getElementById('dobleFaz').addEventListener('change', calcularTotal);
