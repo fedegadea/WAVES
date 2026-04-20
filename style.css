@@ -478,6 +478,97 @@ body {
 }
 .btn-submit.enabled:active { transform: translateY(0); }
 
+/* ── CHECK PILL (doble faz) ── */
+.check-pill-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+.check-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 50px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  user-select: none;
+}
+.check-pill input[type="checkbox"] {
+  width: 18px; height: 18px;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+.check-pill:has(input:checked) {
+  border-color: var(--blue);
+  background: rgba(21,101,192,0.08);
+  color: var(--blue);
+}
+
+/* ── PRECIO BLOCK ── */
+.precio-block {
+  background: linear-gradient(135deg, #E8F4FD 0%, #F0F7FF 100%);
+  border: 2px solid var(--blue-light);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-top: 4px;
+}
+.precio-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.precio-header span { font-size: 1.4rem; }
+.precio-header h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--blue-dark);
+  margin: 0;
+}
+.precio-detalle {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.precio-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--border);
+}
+.precio-fila:last-child { border-bottom: none; }
+.precio-fila span:last-child { font-weight: 600; color: var(--text); }
+.precio-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--blue);
+  color: #fff;
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-top: 4px;
+}
+.precio-total span { font-size: 0.95rem; font-weight: 600; }
+.precio-total strong { font-size: 1.5rem; font-weight: 800; }
+.precio-nota {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 10px;
+  text-align: center;
+  font-style: italic;
+}
+
 /* ── FOOTER ── */
 .footer {
   background: var(--blue-dark);
@@ -501,4 +592,6 @@ body {
   .alias-value { font-size: 1.05rem; }
   .section-title { flex-wrap: wrap; }
   .required-badge { order: 3; margin-left: 0; }
+  .precio-block { padding: 18px 16px; }
+  .precio-total strong { font-size: 1.25rem; }
 }

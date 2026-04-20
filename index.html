@@ -23,28 +23,14 @@
   <section class="hero">
     <h1>Pedí tus impresiones<br/><span>sin salir de casa</span></h1>
     <p>Completá el formulario, pagá por Mercado Pago y recibís todo en la puerta.</p>
-
-    <!-- STEPS -->
     <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-label">Completá<br/>el pedido</div>
-      </div>
+      <div class="step"><div class="step-num">1</div><div class="step-label">Completá<br/>el pedido</div></div>
       <div class="step-line"></div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-label">Transferí<br/>por MP</div>
-      </div>
+      <div class="step"><div class="step-num">2</div><div class="step-label">Transferí<br/>por MP</div></div>
       <div class="step-line"></div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-label">Subí el<br/>comprobante</div>
-      </div>
+      <div class="step"><div class="step-num">3</div><div class="step-label">Subí el<br/>comprobante</div></div>
       <div class="step-line"></div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-label">¡Listo,<br/>enviá!</div>
-      </div>
+      <div class="step"><div class="step-num">4</div><div class="step-label">¡Listo,<br/>enviá!</div></div>
     </div>
   </section>
 
@@ -61,6 +47,7 @@
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="_next" value="https://waves-lr7zccor2-fedes-projects-91be2341.vercel.app/gracias.html" />
       <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="Total estimado" id="totalHidden" value="" />
       <input type="text" name="_honey" style="display:none" />
 
       <!-- PASO 1: DATOS -->
@@ -97,27 +84,27 @@
         </legend>
         <div class="option-grid">
           <label class="option-card">
-            <input type="radio" name="Tipo de copia" value="Blanco y negro" required />
+            <input type="radio" name="Tipo de copia" value="Blanco y negro" required data-tipo="bn" />
             <div class="option-body">
               <span class="option-icon">⬛</span>
               <span class="option-label">Blanco y negro</span>
-              <span class="option-desc">Impresión estándar</span>
+              <span class="option-desc">A4 $60 · Oficio $70</span>
             </div>
           </label>
           <label class="option-card">
-            <input type="radio" name="Tipo de copia" value="Color Láser (alta definición)" />
+            <input type="radio" name="Tipo de copia" value="Color Láser (alta definición)" data-tipo="color" />
             <div class="option-body">
               <span class="option-icon">🎨</span>
               <span class="option-label">Color Láser</span>
-              <span class="option-desc">Excelente definición</span>
+              <span class="option-desc">Desde $500 según papel</span>
             </div>
           </label>
           <label class="option-card">
-            <input type="radio" name="Tipo de copia" value="Color Inkjet (calidad estándar)" />
+            <input type="radio" name="Tipo de copia" value="Color Inkjet (calidad estándar)" data-tipo="color" />
             <div class="option-body">
               <span class="option-icon">🖌️</span>
               <span class="option-label">Color Inkjet</span>
-              <span class="option-desc">Calidad estándar</span>
+              <span class="option-desc">Desde $500 según papel</span>
             </div>
           </label>
         </div>
@@ -156,9 +143,20 @@
               </label>
               <label class="radio-pill">
                 <input type="radio" name="Papel" value="Ilustración 120g brillante" />
-                <span>Ilustración 120g brillante</span>
+                <span>Ilustración 120g</span>
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="Papel" value="Fotográfico" />
+                <span>Fotográfico</span>
               </label>
             </div>
+          </div>
+          <div class="field">
+            <label>Opciones adicionales</label>
+            <label class="check-pill">
+              <input type="checkbox" name="Doble faz" value="Sí" id="dobleFaz" />
+              <span>🔄 Doble faz</span>
+            </label>
           </div>
         </div>
       </fieldset>
@@ -169,26 +167,37 @@
           <span class="section-num">4</span>
           Terminación
         </legend>
-        <div class="option-grid three-col">
+        <div class="option-grid">
           <label class="option-card">
-            <input type="radio" name="Terminación" value="Encuadernado" required />
+            <input type="radio" name="Terminación" value="Encuadernado hasta 200 hojas A4 (+$950)" required data-encuadernado="950" />
             <div class="option-body">
               <span class="option-icon">📚</span>
               <span class="option-label">Encuadernado</span>
+              <span class="option-desc">Hasta 200 hojas · +$950</span>
             </div>
           </label>
           <label class="option-card">
-            <input type="radio" name="Terminación" value="Abrochado" />
+            <input type="radio" name="Terminación" value="Encuadernado hasta 500 hojas A4 (+$1.100)" data-encuadernado="1100" />
+            <div class="option-body">
+              <span class="option-icon">📗</span>
+              <span class="option-label">Encuadernado</span>
+              <span class="option-desc">Hasta 500 hojas · +$1.100</span>
+            </div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="Terminación" value="Abrochado" data-encuadernado="0" />
             <div class="option-body">
               <span class="option-icon">📌</span>
               <span class="option-label">Abrochado</span>
+              <span class="option-desc">Sin costo adicional</span>
             </div>
           </label>
           <label class="option-card">
-            <input type="radio" name="Terminación" value="Suelto" />
+            <input type="radio" name="Terminación" value="Suelto" data-encuadernado="0" />
             <div class="option-body">
               <span class="option-icon">📋</span>
               <span class="option-label">Suelto</span>
+              <span class="option-desc">Sin costo adicional</span>
             </div>
           </label>
         </div>
@@ -235,6 +244,20 @@
         <p class="field-hint">Solo archivos PDF · Máximo 10MB</p>
       </fieldset>
 
+      <!-- PRECIO ESTIMADO -->
+      <div class="precio-block" id="precioBlock" style="display:none;">
+        <div class="precio-header">
+          <span>🧮</span>
+          <h3>Total estimado de tu pedido</h3>
+        </div>
+        <div class="precio-detalle" id="precioDetalle"></div>
+        <div class="precio-total">
+          <span>Total a transferir:</span>
+          <strong id="precioTotal">$0</strong>
+        </div>
+        <p class="precio-nota">* Precio estimado. Puede variar si hay ajustes en el pedido.</p>
+      </div>
+
       <!-- PASO 7: PAGO -->
       <div class="payment-block">
         <div class="payment-header">
@@ -246,13 +269,13 @@
         </div>
         <div class="alias-box">
           <span class="alias-label">Alias MP</span>
-          <span class="alias-value" id="aliasValue">CARDCOPY.MP</span>
+          <span class="alias-value" id="aliasValue">bache.ambos.golf.mp</span>
           <button type="button" class="copy-btn" onclick="copyAlias()">Copiar</button>
         </div>
         <div class="payment-steps">
           <div class="pay-step">
             <span class="pay-num">1</span>
-            <span>Abrí Mercado Pago y transferí al alias de arriba</span>
+            <span>Abrí Mercado Pago y transferí el total al alias de arriba</span>
           </div>
           <div class="pay-step">
             <span class="pay-num">2</span>
@@ -272,7 +295,6 @@
           Comprobante de pago
           <span class="required-badge">Obligatorio para enviar</span>
         </legend>
-
         <div class="upload-area comprobante-upload" id="comprobanteArea">
           <input type="file" id="comprobante" name="Comprobante de pago" accept="image/*,.pdf" class="file-input" />
           <label for="comprobante" class="upload-label">
@@ -282,8 +304,6 @@
             <span class="file-name" id="comprobanteName">Ningún comprobante adjunto</span>
           </label>
         </div>
-
-        <!-- ADVERTENCIA -->
         <div class="warning-box" id="warningBox">
           <span class="warning-icon">⚠️</span>
           <div>
@@ -291,8 +311,6 @@
             <p>El local necesita verificar el pago antes de procesar tu impresión.</p>
           </div>
         </div>
-
-        <!-- CONFIRMACIÓN -->
         <div class="ok-box" id="okBox" style="display:none;">
           <span>✅</span>
           <div>
@@ -311,7 +329,7 @@
         <div class="field">
           <label for="obs">¿Algo más que debamos saber?</label>
           <textarea id="obs" name="Observaciones" rows="3"
-            placeholder="Ej: imprimir del PDF de la página 5 a la 20, doble faz, etc."></textarea>
+            placeholder="Ej: imprimir del PDF de la página 5 a la 20, páginas específicas, etc."></textarea>
         </div>
       </fieldset>
 
@@ -334,49 +352,93 @@
   </footer>
 
   <script>
+    // ── TABLA DE PRECIOS ──
+    const PRECIOS_COPIA = {
+      'bn': { 'A4': 60, 'Oficio': 70 },
+      'color': {
+        'A4': { 'Común 75g': 500, 'Ilustración 120g brillante': 700, 'Fotográfico': 900 },
+        'Oficio': { 'Común 75g': 500, 'Ilustración 120g brillante': 700, 'Fotográfico': 900 }
+      }
+    };
+
+    function formatPeso(n) {
+      return '$' + n.toLocaleString('es-AR');
+    }
+
+    function calcularTotal() {
+      const tipo = document.querySelector('input[name="Tipo de copia"]:checked');
+      const tamaño = document.querySelector('input[name="Tamaño"]:checked');
+      const papel = document.querySelector('input[name="Papel"]:checked');
+      const cantidad = parseInt(document.getElementById('cantidad').value) || 0;
+      const terminacion = document.querySelector('input[name="Terminación"]:checked');
+
+      if (!tipo || !tamaño || !papel || !cantidad) {
+        document.getElementById('precioBlock').style.display = 'none';
+        return;
+      }
+
+      const dataTipo = tipo.dataset.tipo;
+      let precioCopia = 0;
+
+      if (dataTipo === 'bn') {
+        precioCopia = PRECIOS_COPIA.bn[tamaño.value] || 0;
+      } else {
+        precioCopia = (PRECIOS_COPIA.color[tamaño.value] || {})[papel.value] || 0;
+      }
+
+      const subtotalCopias = precioCopia * cantidad;
+      const costoEncuadernado = terminacion ? parseInt(terminacion.dataset.encuadernado || 0) : 0;
+      const total = subtotalCopias + costoEncuadernado;
+
+      // Detalle
+      let detalle = `
+        <div class="precio-fila"><span>${cantidad} copia${cantidad > 1 ? 's' : ''} ${tipo.value} (${tamaño.value} · ${papel.value})</span><span>${formatPeso(precioCopia)} c/u → ${formatPeso(subtotalCopias)}</span></div>
+      `;
+      if (costoEncuadernado > 0) {
+        detalle += `<div class="precio-fila"><span>${terminacion.value}</span><span>${formatPeso(costoEncuadernado)}</span></div>`;
+      }
+
+      document.getElementById('precioDetalle').innerHTML = detalle;
+      document.getElementById('precioTotal').textContent = formatPeso(total);
+      document.getElementById('totalHidden').value = formatPeso(total);
+      document.getElementById('precioBlock').style.display = 'block';
+    }
+
+    // Escuchar cambios para recalcular
+    ['input[name="Tipo de copia"]', 'input[name="Tamaño"]', 'input[name="Papel"]', 'input[name="Terminación"]']
+      .forEach(sel => document.querySelectorAll(sel).forEach(el => el.addEventListener('change', calcularTotal)));
+    document.getElementById('cantidad').addEventListener('input', calcularTotal);
+
     // PDF upload
     document.getElementById('archivoPDF').addEventListener('change', function () {
-      const name = this.files[0] ? this.files[0].name : 'Ningún archivo seleccionado';
-      document.getElementById('pdfName').textContent = name;
+      document.getElementById('pdfName').textContent = this.files[0] ? this.files[0].name : 'Ningún archivo seleccionado';
       document.getElementById('pdfArea').classList.toggle('has-file', !!this.files[0]);
     });
 
-    // Comprobante upload - desbloquea el botón
+    // Comprobante
     document.getElementById('comprobante').addEventListener('change', function () {
       const hasFile = !!this.files[0];
-      const name = hasFile ? this.files[0].name : 'Ningún comprobante adjunto';
-
-      document.getElementById('comprobanteName').textContent = name;
+      document.getElementById('comprobanteName').textContent = hasFile ? this.files[0].name : 'Ningún comprobante adjunto';
       document.getElementById('comprobanteArea').classList.toggle('has-file', hasFile);
-
       document.getElementById('warningBox').style.display = hasFile ? 'none' : 'flex';
       document.getElementById('okBox').style.display = hasFile ? 'flex' : 'none';
       document.getElementById('submitBlocker').style.display = hasFile ? 'none' : 'flex';
       document.getElementById('submitBtn').disabled = !hasFile;
-
-      if (hasFile) {
-        document.getElementById('submitBtn').classList.add('enabled');
-        document.getElementById('comprobanteSection').classList.add('done');
-      } else {
-        document.getElementById('submitBtn').classList.remove('enabled');
-        document.getElementById('comprobanteSection').classList.remove('done');
-      }
+      document.getElementById('submitBtn').classList.toggle('enabled', hasFile);
+      document.getElementById('comprobanteSection').classList.toggle('done', hasFile);
     });
 
     // Option cards highlight
     document.querySelectorAll('.option-card input[type="radio"]').forEach(input => {
       input.addEventListener('change', function () {
-        document.querySelectorAll(`input[name="${this.name}"]`).forEach(r => {
-          r.closest('.option-card').classList.remove('selected');
-        });
+        document.querySelectorAll(`input[name="${this.name}"]`).forEach(r => r.closest('.option-card').classList.remove('selected'));
         this.closest('.option-card').classList.add('selected');
       });
     });
 
     // Copiar alias
     function copyAlias() {
-      const alias = document.getElementById('aliasValue').textContent;
-      navigator.clipboard.writeText(alias).then(() => {
+      navigator.clipboard.writeText('bache.ambos.golf.mp').then(() => {
         const btn = document.querySelector('.copy-btn');
         btn.textContent = '¡Copiado!';
         btn.classList.add('copied');
