@@ -117,11 +117,11 @@
             <label>Tamaño <span class="req">*</span></label>
             <div class="radio-row">
               <label class="radio-pill">
-                <input type="radio" name="fi-radio-tamaño" value="A4" required />
+                <input type="radio" name="fi-radio-tamano" value="A4" required />
                 <span>A4</span>
               </label>
               <label class="radio-pill">
-                <input type="radio" name="fi-radio-tamaño" value="Oficio" />
+                <input type="radio" name="fi-radio-tamano" value="Oficio" />
                 <span>Oficio</span>
               </label>
             </div>
@@ -395,7 +395,7 @@
 
     function calcularTotal() {
       const tipo      = document.querySelector('input[name="fi-radio-tipo"]:checked');
-      const tamaño    = document.querySelector('input[name="fi-radio-tamaño"]:checked');
+      const tamaño    = document.querySelector('input[name="fi-radio-tamano"]:checked');
       const papel     = document.querySelector('input[name="fi-radio-papel"]:checked');
       const hojas     = parseInt(document.getElementById('hojas').value) || 0;
       const copias    = parseInt(document.getElementById('cantidad').value) || 1;
@@ -463,7 +463,7 @@
     // Escuchar cambios
     document.querySelectorAll('input[name="fi-radio-tipo"]').forEach(el =>
       el.addEventListener('change', actualizarCamposPapel));
-    ['input[name="fi-radio-tamaño"]', 'input[name="fi-radio-papel"]', 'input[name="fi-radio-terminacion"]']
+    ['input[name="fi-radio-tamano"]', 'input[name="fi-radio-papel"]', 'input[name="fi-radio-terminacion"]']
       .forEach(sel => document.querySelectorAll(sel).forEach(el => el.addEventListener('change', calcularTotal)));
 
     // Mostrar precio del papel seleccionado
