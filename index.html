@@ -439,8 +439,10 @@
         return;
       }
 
-      // Doble faz no afecta el precio (se cobra por cada cara impresa)
-      const totalCaras = hojas * copias;
+      // Doble faz: si es B&N y está marcado, se cobran 2 caras por hoja
+      const doble = document.getElementById('dobleFaz').checked;
+      const facesMultiplier = (esBN && doble) ? 2 : 1;
+      const totalCaras = hojas * copias * facesMultiplier;
       const subtotal = precioPorCara * totalCaras;
       const costoEncuadernado = terminacion ? parseInt(terminacion.dataset.encuadernado || 0) : 0;
       const total = subtotal + costoEncuadernado;
@@ -448,9 +450,10 @@
       const tamañoLabel = esBN ? (tamaño ? tamaño.value : '—') : 'A4';
       const papelLabel  = esBN ? ' · Papel común' : ' · ' + papel.value;
       const copiasDesc  = copias > 1 ? ` × ${copias} copias` : '';
+      const dobleFazDesc = (esBN && doble) ? ' · Doble faz (×2)' : '';
 
       let detalle = `<div class="precio-fila">
-        <span>${hojas} hojas${copiasDesc} · ${tamañoLabel}${papelLabel}</span>
+        <span>${hojas} hojas${copiasDesc} · ${tamañoLabel}${papelLabel}${dobleFazDesc}</span>
         <span>${formatPeso(precioPorCara)}/cara × ${totalCaras} = ${formatPeso(subtotal)}</span>
       </div>`;
 
