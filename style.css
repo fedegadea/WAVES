@@ -629,6 +629,8 @@ body {
 @media (max-width: 640px) {
   .form-card { padding: 28px 18px; gap: 32px; }
   .option-grid.three-col { grid-template-columns: 1fr 1fr; }
+  .header-inner { flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+  .logo-text { letter-spacing: 2px; font-size: 1.5rem; }
   .header-badge { display: none; }
   .steps { gap: 4px; }
   .step-line { max-width: 24px; }
