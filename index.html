@@ -12,9 +12,7 @@
   <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
-      <img src="public/images/logo-cardcopy.png" alt="CardCopy" class="logo"
-           onerror="this.style.display='none'; document.querySelector('.logo-text').style.display='flex'" />
-      <span class="logo-text" style="display:none;">CardCopy</span>
+      <span class="logo-text">CardCopy</span>
       <div class="header-badge">Soluciones Digitales</div>
     </div>
   </header>
@@ -130,15 +128,15 @@
             <label>Tipo de papel <span class="req">*</span></label>
             <div class="radio-row">
               <label class="radio-pill">
-                <input type="radio" name="fi-radio-papel" value="Común 75g" data-precio-papel="500" />
+                <input type="radio" name="fi-radio-papel" value="Común 75g" data-precio-papel="700" />
                 <span>Común 75g</span>
               </label>
               <label class="radio-pill">
-                <input type="radio" name="fi-radio-papel" value="Ilustración 120g brillante" data-precio-papel="700" />
+                <input type="radio" name="fi-radio-papel" value="Ilustración 120g brillante" data-precio-papel="900" />
                 <span>Ilustración 120g</span>
               </label>
               <label class="radio-pill">
-                <input type="radio" name="fi-radio-papel" value="Fotográfico" data-precio-papel="900" />
+                <input type="radio" name="fi-radio-papel" value="Fotográfico" data-precio-papel="1200" />
                 <span>Fotográfico</span>
               </label>
             </div>
@@ -374,7 +372,7 @@
     // ── TABLA DE PRECIOS ──
     const PRECIOS = {
       'bn':    { 'A4': 60, 'Oficio': 70 },
-      'color': { 'Común 75g': 500, 'Ilustración 120g brillante': 700, 'Fotográfico': 900 }
+      'color': { 'Común 75g': 700, 'Ilustración 120g brillante': 900, 'Fotográfico': 1200 }
     };
 
     function formatPeso(n) {
